@@ -4,13 +4,37 @@
     <meta charset="utf-8">
     <meta name="download_date" content="2024-10-08T16:43:21.473Z"/>
     <meta name="color-scheme" content="light dark">
-    <style></style>
+    <style>
+        .json-container {
+            white-space: pre-wrap; /* Позволяет переносу строк */
+            font-family: monospace; /* Шрифт для лучшей читаемости */
+            background-color: #f8f8f8; /* Цвет фона */
+            padding: 10px; /* Отступы */
+            border: 1px solid #ccc; /* Граница */
+            border-radius: 4px; /* Скругленные углы */
+            overflow: auto; /* Полоса прокрутки при необходимости */
+        }
+    </style>
 </head>
 <body>
-    <pre>
-{"assetsUrl":"https://android-assets.jackboxgames.com/TJPP5_assets4.zip","NumberOfEntries":11628,"uncompressedSize":1559493210}
-    </pre>
-    <div class="json-formatter-container"></div>
-    <div id="shimeji-workArea" style="position: fixed; background: transparent; z-index: 2147483643; width: 100vw; height: 100vh; left: 0px; top: 0px; transform: translate(0px, 0px); pointer-events: none;"></div>
+    <div id="json-output" class="json-container">Загрузка...</div>
+    <script>
+        // Загружаем JSON файл
+        fetch('TJPP5_assets4.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Сеть не в порядке');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const jsonOutput = document.getElementById('json-output');
+                jsonOutput.textContent = JSON.stringify(data, null, 2); // Форматирование JSON с отступами
+            })
+            .catch(error => {
+                const jsonOutput = document.getElementById('json-output');
+                jsonOutput.textContent = 'Ошибка: ' + error.message;
+            });
+    </script>
 </body>
 </html>
