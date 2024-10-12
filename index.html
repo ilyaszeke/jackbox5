@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple JSON Display</title>
+    <meta charset="utf-8">
+    <meta name="color-scheme" content="light dark">
+    <meta name="shimejiBrowserExtensionId" content="gohjpllcolmccldfdggmamodembldgpc" data-version="2.0.5">
+    <title>JSON Display</title>
     <style>
         body {
             background-color: #000; /* Чёрный фон */
@@ -14,12 +15,41 @@
         pre {
             white-space: pre-wrap; /* Сохранение пробелов и перенос строк */
             word-wrap: break-word; /* Перенос длинных строк */
+            background-color: #1e1e1e; /* Тёмный фон для блока с JSON */
+            padding: 15px; /* Отступы внутри блока */
+            border-radius: 5px; /* Скругление углов */
+        }
+        body.shimeji-pinned iframe {
+            pointer-events: none;
+        }
+        body.shimeji-select-ie {
+            cursor: cell !important;
+        }
+        #shimeji-contextMenu::-webkit-scrollbar {
+            width: 6px;
+        }
+        #shimeji-contextMenu::-webkit-scrollbar-thumb {
+            background-color: rgba(30,30,30,0.6);
+            border-radius: 3px;
+        }
+        #shimeji-contextMenu::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        /* Рабочая область Shimeji */
+        #shimeji-workArea {
+            position: fixed;
+            background: transparent;
+            z-index: 2147483643;
+            width: 100vw;
+            height: 100vh;
+            left: 0px;
+            top: 0px;
+            transform: translate(0px, 0px);
+            pointer-events: none; /* Отключение взаимодействия с элементом */
         }
     </style>
 </head>
 <body>
-
-    <h1>JSON Data</h1>
     <pre>
 {
     "assetsUrl": "https://android-assets.jackboxgames.com/TJPP5_assets4.zip",
@@ -27,6 +57,9 @@
     "uncompressedSize": 1559493210
 }
     </pre>
+
+    <div class="json-formatter-container"></div>
+    <div id="shimeji-workArea"></div>
 
 </body>
 </html>
